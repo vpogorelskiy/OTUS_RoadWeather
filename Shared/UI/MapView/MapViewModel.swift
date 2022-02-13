@@ -3,7 +3,11 @@ import CoreLocation
 import MapKit
 
 class MapViewModel: NSObject, ObservableObject {
-    @Published var mapRegion: MKCoordinateRegion = .init()
+    @Published var mapRegion: MKCoordinateRegion = .init() {
+        didSet {
+//            print("\(Self.self).\(#function): \(mapRegion)")
+        }
+    }
     
     private let locationManager: CLLocationManager
     private var userLocation: CLLocation = .init() {
@@ -19,6 +23,10 @@ class MapViewModel: NSObject, ObservableObject {
         locationManager = .init()
         super.init()
         locationManager.delegate = self
+    }
+    
+    func updateUserLocation() {
+        locationManager.startUpdatingLocation()
     }
     
     func attemptLocationAccess() {
