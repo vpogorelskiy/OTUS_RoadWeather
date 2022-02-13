@@ -47,6 +47,7 @@ extension MapViewModel: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("\(Self.self).\(#function): \(locations)")
         guard let firstLocation = locations.first else {
             return
         }

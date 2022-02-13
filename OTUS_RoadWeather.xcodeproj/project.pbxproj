@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2B5D869927B947030032CA96 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B5D869827B947030032CA96 /* MapKit.framework */; };
 		2B5D869B27B9478D0032CA96 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D869A27B9478D0032CA96 /* MapViewModel.swift */; };
+		2B5D869E27B94E7A0032CA96 /* RoutesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D869D27B94E7A0032CA96 /* RoutesViewModel.swift */; };
 		2B72B98427B640FF00840C3F /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B72B98327B640FF00840C3F /* MapView.swift */; };
 		2B72B98627B6413300840C3F /* RoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B72B98527B6413200840C3F /* RoutesView.swift */; };
 		2BAADEFC27AC35F400ABD965 /* OTUS_RoadWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAADEEC27AC35F200ABD965 /* OTUS_RoadWeatherApp.swift */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		2B5D869827B947030032CA96 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.2.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
 		2B5D869A27B9478D0032CA96 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		2B5D869D27B94E7A0032CA96 /* RoutesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesViewModel.swift; sourceTree = "<group>"; };
 		2B72B98327B640FF00840C3F /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		2B72B98527B6413200840C3F /* RoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesView.swift; sourceTree = "<group>"; };
 		2BAADEEC27AC35F200ABD965 /* OTUS_RoadWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTUS_RoadWeatherApp.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				2B72B98527B6413200840C3F /* RoutesView.swift */,
+				2B5D869D27B94E7A0032CA96 /* RoutesViewModel.swift */,
 			);
 			path = RoutesView;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 			files = (
 				2B72B98627B6413300840C3F /* RoutesView.swift in Sources */,
 				2B5D869B27B9478D0032CA96 /* MapViewModel.swift in Sources */,
+				2B5D869E27B94E7A0032CA96 /* RoutesViewModel.swift in Sources */,
 				2BAADEFE27AC35F400ABD965 /* ContentView.swift in Sources */,
 				2B72B98427B640FF00840C3F /* MapView.swift in Sources */,
 				2BAADEFC27AC35F400ABD965 /* OTUS_RoadWeatherApp.swift in Sources */,

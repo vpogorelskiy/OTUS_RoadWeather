@@ -5,12 +5,12 @@ struct ContentView: View {
         TabView {
             RoutesView()
                 .tabItem {
-                    Image(systemName: "")
+                    Image(systemName: "bookmark")
                     Text("Routes")
                 }
             MapView()
                 .tabItem {
-                    Image(systemName: "")
+                    Image(systemName: "location.viewfinder")
                     Text("Map")
                 }
         }
