@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B5D869927B947030032CA96 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B5D869827B947030032CA96 /* MapKit.framework */; };
+		2B5D869B27B9478D0032CA96 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D869A27B9478D0032CA96 /* MapViewModel.swift */; };
+		2B72B98427B640FF00840C3F /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B72B98327B640FF00840C3F /* MapView.swift */; };
+		2B72B98627B6413300840C3F /* RoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B72B98527B6413200840C3F /* RoutesView.swift */; };
 		2BAADEFC27AC35F400ABD965 /* OTUS_RoadWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAADEEC27AC35F200ABD965 /* OTUS_RoadWeatherApp.swift */; };
 		2BAADEFD27AC35F400ABD965 /* OTUS_RoadWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAADEEC27AC35F200ABD965 /* OTUS_RoadWeatherApp.swift */; };
 		2BAADEFE27AC35F400ABD965 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAADEED27AC35F200ABD965 /* ContentView.swift */; };
@@ -16,6 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B5D869827B947030032CA96 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.2.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
+		2B5D869A27B9478D0032CA96 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		2B72B98327B640FF00840C3F /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		2B72B98527B6413200840C3F /* RoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesView.swift; sourceTree = "<group>"; };
 		2BAADEEC27AC35F200ABD965 /* OTUS_RoadWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTUS_RoadWeatherApp.swift; sourceTree = "<group>"; };
 		2BAADEED27AC35F200ABD965 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2BAADEEE27AC35F400ABD965 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -29,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B5D869927B947030032CA96 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,20 +51,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B5D869727B947020032CA96 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2B5D869827B947030032CA96 /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2B72B98027B640E000840C3F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				2B72B98227B640ED00840C3F /* RoutesView */,
+				2B72B98127B640E800840C3F /* MapView */,
+				2BAADEED27AC35F200ABD965 /* ContentView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		2B72B98127B640E800840C3F /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				2B72B98327B640FF00840C3F /* MapView.swift */,
+				2B5D869A27B9478D0032CA96 /* MapViewModel.swift */,
+			);
+			path = MapView;
+			sourceTree = "<group>";
+		};
+		2B72B98227B640ED00840C3F /* RoutesView */ = {
+			isa = PBXGroup;
+			children = (
+				2B72B98527B6413200840C3F /* RoutesView.swift */,
+			);
+			path = RoutesView;
+			sourceTree = "<group>";
+		};
 		2BAADEE627AC35F200ABD965 = {
 			isa = PBXGroup;
 			children = (
 				2BAADEEB27AC35F200ABD965 /* Shared */,
 				2BAADEFA27AC35F400ABD965 /* macOS */,
 				2BAADEF427AC35F400ABD965 /* Products */,
+				2B5D869727B947020032CA96 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		2BAADEEB27AC35F200ABD965 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2B72B98027B640E000840C3F /* UI */,
 				2BAADEEC27AC35F200ABD965 /* OTUS_RoadWeatherApp.swift */,
-				2BAADEED27AC35F200ABD965 /* ContentView.swift */,
 				2BAADEEE27AC35F400ABD965 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -176,7 +221,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B72B98627B6413300840C3F /* RoutesView.swift in Sources */,
+				2B5D869B27B9478D0032CA96 /* MapViewModel.swift in Sources */,
 				2BAADEFE27AC35F400ABD965 /* ContentView.swift in Sources */,
+				2B72B98427B640FF00840C3F /* MapView.swift in Sources */,
 				2BAADEFC27AC35F400ABD965 /* OTUS_RoadWeatherApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -314,6 +362,7 @@
 				DEVELOPMENT_TEAM = R4G26CHU6B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Need your location to track route";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -344,6 +393,7 @@
 				DEVELOPMENT_TEAM = R4G26CHU6B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Need your location to track route";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
