@@ -11,16 +11,31 @@ struct MapView: View {
                 .onAppear {
                     viewModel.attemptLocationAccess()
                 }
-            MapOverlayView {
-                viewModel.attemptLocationAccess()
-            }
+            VStack {
+                DebouncingTextField(title: "",
+                                    debouncedText: $viewModel.searchText)
+                if !viewModel.foundLocations.isEmpty {
+                    List {
+                        ForEach(viewModel.foundLocations, id: \.location) { location in
+                            Button {
+                                print("Location selected: \(location)")
+                            } label: {
+                                Text(location.name ?? "\(location)")
+                            }
+
+                            
+                        }
+                    }.frame(minHeight: 30, maxHeight: 150, alignment: .top)
+                }
+                Spacer()
+            }.padding()
         }
     }
 }
 
 struct MapOverlayView: View {
     private let buttonsSize: CGFloat = 40
-    
+
     var onLocationTapped: () -> ()
     
     var body: some View {

@@ -9,7 +9,22 @@ class MapViewModel: NSObject, ObservableObject {
         }
     }
     
+    var searchText: String = "" {
+        didSet {
+            print("\(Self.self).\(#function): \(searchText)")
+            updateFoundLocations(searchText)
+        }
+    }
+    
+    @Published var foundLocations: [CLPlacemark] = [] {
+        didSet {
+            print("\(Self.self).\(#function): \(foundLocations)")
+        }
+    }
+    
+    
     private let locationManager: CLLocationManager
+    private let geoCoder: CLGeocoder
     private var userLocation: CLLocation = .init() {
         didSet {
             mapRegion = .init(center: userLocation.coordinate, span: mapSpan)
@@ -21,6 +36,7 @@ class MapViewModel: NSObject, ObservableObject {
     
     override init() {
         locationManager = .init()
+        geoCoder = .init()
         super.init()
         locationManager.delegate = self
     }
@@ -41,6 +57,29 @@ class MapViewModel: NSObject, ObservableObject {
             locationManager.requestWhenInUseAuthorization()
         } else {
             locationManager.requestLocation()
+        }
+    }
+    
+    private func updateFoundLocations(_ query: String) {
+        guard !query.isEmpty else {
+            foundLocations = []
+            return
+        }
+        
+        
+        geoCoder.geocodeAddressString(query, in: nil, preferredLocale: .init(identifier: "RU")) { [weak self] placemarks, error in
+            if let error = error {
+                print("\(Self.self).\(#function); ERROR finding location: \(error) ")
+            }
+            
+            guard  query == self?.searchText else { return }
+            
+            guard let placemarks = placemarks else {
+                self?.foundLocations = []
+                return
+            }
+            
+            self?.foundLocations = placemarks
         }
     }
 }

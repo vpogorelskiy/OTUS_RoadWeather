@@ -5,6 +5,7 @@ import Combine
 struct DebouncingTextField: View {
     let title: String
     
+    
     @Binding var debouncedText : String
     @StateObject private var vm = ViewModel()
     
@@ -15,8 +16,9 @@ struct DebouncingTextField: View {
                 .padding(.leading, 5)
                 .overlay(
                     RoundedRectangle(cornerRadius: 6)
-                        .stroke(Color.blue, lineWidth: 1)
+                        .stroke(Color.black, lineWidth: 1)
                 )
+                .background(.white)
                 .padding(.horizontal, 20)
         }.onReceive(vm.$debouncedText) { (val) in
             debouncedText = val
@@ -29,11 +31,12 @@ private extension DebouncingTextField {
         @Published var debouncedText = ""
         @Published var searchText = ""
         
+        private let debounceInterval = 1
         private var subscriptions = Set<AnyCancellable>()
         
         init() {
             $searchText
-                .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
+                .debounce(for: .seconds(debounceInterval), scheduler: DispatchQueue.main)
                 .sink(receiveValue: { [weak self] t in
                     self?.debouncedText = t
                 } )
