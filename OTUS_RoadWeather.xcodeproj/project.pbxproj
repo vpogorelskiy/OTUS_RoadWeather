@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B2A426527C2A5540024267B /* RouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2A426427C2A5540024267B /* RouteView.swift */; };
+		2B2A426827C2ADE30024267B /* MKMultipointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2A426727C2ADE30024267B /* MKMultipointExtension.swift */; };
 		2B5D869927B947030032CA96 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B5D869827B947030032CA96 /* MapKit.framework */; };
 		2B5D869B27B9478D0032CA96 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D869A27B9478D0032CA96 /* MapViewModel.swift */; };
 		2B5D869E27B94E7A0032CA96 /* RoutesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D869D27B94E7A0032CA96 /* RoutesViewModel.swift */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B2A426427C2A5540024267B /* RouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteView.swift; sourceTree = "<group>"; };
+		2B2A426727C2ADE30024267B /* MKMultipointExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMultipointExtension.swift; sourceTree = "<group>"; };
 		2B5D869827B947030032CA96 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.2.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
 		2B5D869A27B9478D0032CA96 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		2B5D869D27B94E7A0032CA96 /* RoutesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesViewModel.swift; sourceTree = "<group>"; };
@@ -55,6 +59,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B2A426627C2ADCF0024267B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2B2A426727C2ADE30024267B /* MKMultipointExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		2B5D869727B947020032CA96 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +99,7 @@
 			children = (
 				2B72B98327B640FF00840C3F /* MapView.swift */,
 				2B5D869A27B9478D0032CA96 /* MapViewModel.swift */,
+				2B2A426427C2A5540024267B /* RouteView.swift */,
 			);
 			path = MapView;
 			sourceTree = "<group>";
@@ -113,6 +126,7 @@
 		2BAADEEB27AC35F200ABD965 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2B2A426627C2ADCF0024267B /* Extensions */,
 				2B72B98027B640E000840C3F /* UI */,
 				2BAADEEC27AC35F200ABD965 /* OTUS_RoadWeatherApp.swift */,
 				2BAADEEE27AC35F400ABD965 /* Assets.xcassets */,
@@ -239,8 +253,10 @@
 				2B5D869B27B9478D0032CA96 /* MapViewModel.swift in Sources */,
 				2B5D869E27B94E7A0032CA96 /* RoutesViewModel.swift in Sources */,
 				2BAADEFE27AC35F400ABD965 /* ContentView.swift in Sources */,
+				2B2A426527C2A5540024267B /* RouteView.swift in Sources */,
 				2B72B98427B640FF00840C3F /* MapView.swift in Sources */,
 				2B5D86A127BB9A930032CA96 /* DebouncingTextField.swift in Sources */,
+				2B2A426827C2ADE30024267B /* MKMultipointExtension.swift in Sources */,
 				2BAADEFC27AC35F400ABD965 /* OTUS_RoadWeatherApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

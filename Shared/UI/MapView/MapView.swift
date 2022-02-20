@@ -2,73 +2,35 @@ import Foundation
 import SwiftUI
 import MapKit
 
-struct MapView: View {
-    @ObservedObject var viewModel: MapViewModel = .init()
+struct MapView: UIViewRepresentable {
+    typealias UIViewType = MKMapView
     
-    var body: some View {
-        ZStack {
-            Map(coordinateRegion: $viewModel.mapRegion, showsUserLocation: true)
-                .onAppear {
-                    viewModel.attemptLocationAccess()
-                }
-            VStack {
-                DebouncingTextField(title: "",
-                                    debouncedText: $viewModel.searchText)
-                if !viewModel.foundLocations.isEmpty {
-                    List {
-                        ForEach(viewModel.foundLocations, id: \.location) { location in
-                            Button {
-                                print("Location selected: \(location)")
-                            } label: {
-                                Text(location.name ?? "\(location)")
-                            }
-
-                            
-                        }
-                    }.frame(minHeight: 30, maxHeight: 150, alignment: .top)
-                }
-                Spacer()
-            }.padding()
-        }
+    @ObservedObject var viewModel: MapViewModel
+    
+    //
+    func makeCoordinator() -> MapViewCoordinator {
+        return MapViewCoordinator()
     }
-}
-
-struct MapOverlayView: View {
-    private let buttonsSize: CGFloat = 40
-
-    var onLocationTapped: () -> ()
     
-    var body: some View {
-        HStack {
-            Spacer()
-            VStack {
-                Spacer()
-                    .frame(height: 20)
-                
-                Button {
-                    print("Find tapped")
-                } label: {
-                    Image(systemName: "magnifyingglass")
-                }
-                .frame(width: buttonsSize, height: buttonsSize)
-                .background(.white)
-                .cornerRadius(buttonsSize / 4)
-                
-                Spacer()
-                
-                Button {
-                    print("Location tapped")
-                    onLocationTapped()
-                } label: {
-                    Image(systemName: "location")
-                }
-                .frame(width: buttonsSize, height: buttonsSize)
-                .background(.white)
-                .cornerRadius(buttonsSize / 4)
-                
-                Spacer()
-                    .frame(height: 50)
-            }.padding()
+    func makeUIView(context: Context) -> MKMapView {
+        let mapView = MKMapView()
+        mapView.showsUserLocation = true
+        mapView.delegate = context.coordinator
+        mapView.setRegion(viewModel.mapRegion, animated: true)
+        viewModel.mapView = mapView
+        
+        return mapView
+    }
+    
+    func updateUIView(_ uiView: MKMapView, context: Context) {
+    }
+    
+    class MapViewCoordinator: NSObject, MKMapViewDelegate {
+        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+            let renderer = MKPolylineRenderer(overlay: overlay)
+            renderer.strokeColor = .systemBlue
+            renderer.lineWidth = 5
+            return renderer
         }
     }
 }
