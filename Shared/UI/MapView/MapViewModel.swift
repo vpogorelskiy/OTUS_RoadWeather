@@ -71,28 +71,33 @@ class MapViewModel: NSObject, ObservableObject {
     }
     
     func buildRoute(to: CLPlacemark) {
-        guard let destCoordinate = to.location?.coordinate, let map = mapView else { return }
-        let from = MKPlacemark(coordinate: userLocation.coordinate)
-        let dest = MKPlacemark(coordinate: destCoordinate)
+        guard let map = mapView else { return }
         
         
-        print("Searching route from \(from); To: \(to)")
-        
-        let request = MKDirections.Request()
-        request.source = MKMapItem(placemark: from)
-        request.destination = MKMapItem(placemark: dest)
-        request.transportType = .automobile
-        
-        let directions = MKDirections(request: request)
-        directions.calculate { response, error in
-            guard let route = response?.routes.first else { return }
-            map.addAnnotations([from, dest])
-            map.addOverlay(route.polyline)
-            map.setVisibleMapRect(
-                route.polyline.boundingMapRect,
-                edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
-                animated: true)
-            self.lastRoute = route
+        geoCoder.reverseGeocodeLocation(userLocation) { placemarks, error in
+            guard let placeMark = placemarks?.first else { return }
+            
+            let from = MKPlacemark(placemark: placeMark)
+            let dest = MKPlacemark(placemark: to)
+            
+            let request = MKDirections.Request()
+            request.source = MKMapItem(placemark: from)
+            request.destination = MKMapItem(placemark: dest)
+            request.transportType = .automobile
+            
+            let directions = MKDirections(request: request)
+            directions.calculate { response, error in
+                guard let route = response?.routes.first else { return }
+                map.removeAnnotations(map.annotations)
+                map.removeOverlays(map.overlays)
+                map.addAnnotations([from, dest])
+                map.addOverlay(route.polyline)
+                map.setVisibleMapRect(
+                    route.polyline.boundingMapRect,
+                    edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
+                    animated: true)
+                self.lastRoute = route
+            }
         }
     }
     

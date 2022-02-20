@@ -67,6 +67,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		2B2A426927C2B6F30024267B /* RouteView */ = {
+			isa = PBXGroup;
+			children = (
+				2B2A426427C2A5540024267B /* RouteView.swift */,
+			);
+			path = RouteView;
+			sourceTree = "<group>";
+		};
 		2B5D869727B947020032CA96 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +96,7 @@
 			children = (
 				2B5D869F27BB99780032CA96 /* Views */,
 				2B72B98227B640ED00840C3F /* SavedRoutesView */,
+				2B2A426927C2B6F30024267B /* RouteView */,
 				2B72B98127B640E800840C3F /* MapView */,
 				2BAADEED27AC35F200ABD965 /* ContentView.swift */,
 			);
@@ -99,7 +108,6 @@
 			children = (
 				2B72B98327B640FF00840C3F /* MapView.swift */,
 				2B5D869A27B9478D0032CA96 /* MapViewModel.swift */,
-				2B2A426427C2A5540024267B /* RouteView.swift */,
 			);
 			path = MapView;
 			sourceTree = "<group>";
