@@ -8,6 +8,6 @@ struct RouteItem: Identifiable {
     let title: String
 }
 
-class RoutesViewModel: ObservableObject {
+class SavedRoutesViewModel: ObservableObject {
     var routes: [RouteItem] = [] //Array(repeating: RouteItem(title: "Some route"), count: 5)
 }

@@ -1,8 +1,8 @@
 import Foundation
 import SwiftUI
 
-struct RoutesView: View {
-    @ObservedObject var viewModel: RoutesViewModel = .init()
+struct SavedRoutesView: View {
+    @ObservedObject var viewModel: SavedRoutesViewModel = .init()
     
     var body: some View {
         NavigationView {

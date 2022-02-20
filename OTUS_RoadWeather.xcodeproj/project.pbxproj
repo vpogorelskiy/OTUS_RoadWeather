@@ -11,10 +11,10 @@
 		2B2A426827C2ADE30024267B /* MKMultipointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2A426727C2ADE30024267B /* MKMultipointExtension.swift */; };
 		2B5D869927B947030032CA96 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B5D869827B947030032CA96 /* MapKit.framework */; };
 		2B5D869B27B9478D0032CA96 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D869A27B9478D0032CA96 /* MapViewModel.swift */; };
-		2B5D869E27B94E7A0032CA96 /* RoutesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D869D27B94E7A0032CA96 /* RoutesViewModel.swift */; };
+		2B5D869E27B94E7A0032CA96 /* SavedRoutesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D869D27B94E7A0032CA96 /* SavedRoutesVM.swift */; };
 		2B5D86A127BB9A930032CA96 /* DebouncingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D86A027BB9A930032CA96 /* DebouncingTextField.swift */; };
 		2B72B98427B640FF00840C3F /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B72B98327B640FF00840C3F /* MapView.swift */; };
-		2B72B98627B6413300840C3F /* RoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B72B98527B6413200840C3F /* RoutesView.swift */; };
+		2B72B98627B6413300840C3F /* SavedRoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B72B98527B6413200840C3F /* SavedRoutesView.swift */; };
 		2BAADEFC27AC35F400ABD965 /* OTUS_RoadWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAADEEC27AC35F200ABD965 /* OTUS_RoadWeatherApp.swift */; };
 		2BAADEFD27AC35F400ABD965 /* OTUS_RoadWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAADEEC27AC35F200ABD965 /* OTUS_RoadWeatherApp.swift */; };
 		2BAADEFE27AC35F400ABD965 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAADEED27AC35F200ABD965 /* ContentView.swift */; };
@@ -28,10 +28,10 @@
 		2B2A426727C2ADE30024267B /* MKMultipointExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMultipointExtension.swift; sourceTree = "<group>"; };
 		2B5D869827B947030032CA96 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.2.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
 		2B5D869A27B9478D0032CA96 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
-		2B5D869D27B94E7A0032CA96 /* RoutesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesViewModel.swift; sourceTree = "<group>"; };
+		2B5D869D27B94E7A0032CA96 /* SavedRoutesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRoutesVM.swift; sourceTree = "<group>"; };
 		2B5D86A027BB9A930032CA96 /* DebouncingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebouncingTextField.swift; sourceTree = "<group>"; };
 		2B72B98327B640FF00840C3F /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
-		2B72B98527B6413200840C3F /* RoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesView.swift; sourceTree = "<group>"; };
+		2B72B98527B6413200840C3F /* SavedRoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRoutesView.swift; sourceTree = "<group>"; };
 		2BAADEEC27AC35F200ABD965 /* OTUS_RoadWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTUS_RoadWeatherApp.swift; sourceTree = "<group>"; };
 		2BAADEED27AC35F200ABD965 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2BAADEEE27AC35F400ABD965 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -87,7 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				2B5D869F27BB99780032CA96 /* Views */,
-				2B72B98227B640ED00840C3F /* RoutesView */,
+				2B72B98227B640ED00840C3F /* SavedRoutesView */,
 				2B72B98127B640E800840C3F /* MapView */,
 				2BAADEED27AC35F200ABD965 /* ContentView.swift */,
 			);
@@ -104,13 +104,13 @@
 			path = MapView;
 			sourceTree = "<group>";
 		};
-		2B72B98227B640ED00840C3F /* RoutesView */ = {
+		2B72B98227B640ED00840C3F /* SavedRoutesView */ = {
 			isa = PBXGroup;
 			children = (
-				2B72B98527B6413200840C3F /* RoutesView.swift */,
-				2B5D869D27B94E7A0032CA96 /* RoutesViewModel.swift */,
+				2B72B98527B6413200840C3F /* SavedRoutesView.swift */,
+				2B5D869D27B94E7A0032CA96 /* SavedRoutesVM.swift */,
 			);
-			path = RoutesView;
+			path = SavedRoutesView;
 			sourceTree = "<group>";
 		};
 		2BAADEE627AC35F200ABD965 = {
@@ -249,9 +249,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B72B98627B6413300840C3F /* RoutesView.swift in Sources */,
+				2B72B98627B6413300840C3F /* SavedRoutesView.swift in Sources */,
 				2B5D869B27B9478D0032CA96 /* MapViewModel.swift in Sources */,
-				2B5D869E27B94E7A0032CA96 /* RoutesViewModel.swift in Sources */,
+				2B5D869E27B94E7A0032CA96 /* SavedRoutesVM.swift in Sources */,
 				2BAADEFE27AC35F400ABD965 /* ContentView.swift in Sources */,
 				2B2A426527C2A5540024267B /* RouteView.swift in Sources */,
 				2B72B98427B640FF00840C3F /* MapView.swift in Sources */,

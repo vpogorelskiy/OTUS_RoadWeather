@@ -8,7 +8,7 @@ struct ContentView: View {
                     Image(systemName: "location.viewfinder")
                     Text("Map")
                 }
-            RoutesView()
+            SavedRoutesView()
                 .tabItem {
                     Image(systemName: "bookmark")
                     Text("Routes")
