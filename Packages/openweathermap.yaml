@@ -1,0 +1,414 @@
+openapi: 3.0.0
+info:
+  title: LoopBack Application
+  version: 1.0.0
+servers: 
+- url: https://api.openweathermap.org/data/2.5/
+paths:
+  /onecall/:
+    get:
+      description: 'One call'
+      meta:
+        element: ''
+        originalPath: >-
+          https://api.openweathermap.org/data/2.5/onecall?apiKey=6d523126834dab139644ad35cb0e98b2&lat=51.64097&lon=39.08505&units=metric
+      operationId: 'get-https:--api.openweathermap.org-data-2.5-onecall'
+      parameters:
+        - description: apiKey
+          in: query
+          name: apiKey
+          schema:
+            default: 6d523126834dab139644ad35cb0e98b2
+            example: 6d523126834dab139644ad35cb0e98b2
+            type: string
+        - description: lat
+          in: query
+          name: lat
+          schema:
+            default: '51.64097'
+            example: '51.64097'
+            type: string
+        - description: lon
+          in: query
+          name: lon
+          schema:
+            default: '39.08505'
+            example: '39.08505'
+            type: string
+        - description: units
+          in: query
+          name: units
+          schema:
+            default: metric
+            example: metric
+            type: string
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                example-0001:
+                  value:
+                    alerts:
+                      - description: ''
+                        end: 1645455600
+                        event: Other dangers
+                        sender_name: ''
+                        start: 1645430400
+                        tags: []
+                      - description: местами гололедица
+                        end: 1645455600
+                        event: Прочие опасности
+                        sender_name: ''
+                        start: 1645430400
+                        tags: []
+                    current:
+                      clouds: 48
+                      dew_point: 1.35
+                      dt: 1645432979
+                      feels_like: -1.48
+                      humidity: 93
+                      pressure: 1008
+                      sunrise: 1645417601
+                      sunset: 1645454896
+                      temp: 2.36
+                      uvi: 1.47
+                      visibility: 10000
+                      weather:
+                        - description: scattered clouds
+                          icon: 03d
+                          id: 802
+                          main: Clouds
+                      wind_deg: 212
+                      wind_gust: 10.83
+                      wind_speed: 4.16
+                    daily:
+                      - clouds: 48
+                        dew_point: 1.35
+                        dt: 1645434000
+                        feels_like:
+                          day: -1.48
+                          eve: -2.71
+                          morn: -6.09
+                          night: -4.48
+                        humidity: 93
+                        moon_phase: 0.66
+                        moonrise: 1645475940
+                        moonset: 1645424580
+                        pop: 0.04
+                        pressure: 1008
+                        sunrise: 1645417601
+                        sunset: 1645454896
+                        temp:
+                          day: 2.36
+                          eve: 1.15
+                          max: 2.36
+                          min: -3.25
+                          morn: -2.29
+                          night: 0.09
+                        uvi: 1.47
+                        weather:
+                          - description: scattered clouds
+                            icon: 03d
+                            id: 802
+                            main: Clouds
+                        wind_deg: 242
+                        wind_gust: 12.34
+                        wind_speed: 5.4
+                    hourly:
+                      - clouds: 44
+                        dew_point: 1
+                        dt: 1645430400
+                        feels_like: -1.59
+                        humidity: 93
+                        pop: 0
+                        pressure: 1008
+                        temp: 2.01
+                        uvi: 1.21
+                        visibility: 10000
+                        weather:
+                          - description: scattered clouds
+                            icon: 03d
+                            id: 802
+                            main: Clouds
+                        wind_deg: 218
+                        wind_gust: 10.01
+                        wind_speed: 3.67
+                    lat: 51.641
+                    lon: 39.0851
+                    minutely:
+                      - dt: 1645432980
+                        precipitation: 0
+                      timezone: Europe/Moscow
+                    timezone_offset: 10800
+        default:
+          description: enexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+      summary: List api.openweathermap.org 2.5s
+      tags:
+        - Miscellaneous
+
+components:
+  schemas:
+    ErrorModel:
+      required:
+      - cod
+      - message
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          maximum: 600
+          minimum: 100
+          type: integer
+    CurrentInfo: 
+      type: object
+      properties: 
+        dt: 
+          type: integer
+          format: int32
+        sunrise: 
+          type: integer
+          format: int32
+        sunset: 
+          type: integer
+          format: int32
+        temp: 
+          type: number
+        feels_like: 
+          type: number
+        pressure: 
+          type: integer
+          format: int32
+        humidity: 
+          type: integer
+          format: int32
+        dew_point: 
+          type: number
+        uvi: 
+          type: number
+        clouds: 
+          type: integer
+          format: int32
+        visibility: 
+          type: integer
+          format: int32
+        wind_speed: 
+          type: number
+        wind_deg: 
+          type: integer
+          format: int32
+        wind_gust: 
+          type: number
+        weather: 
+          type: array
+          items: 
+            type: object
+            properties: 
+              id: 
+                type: integer
+                format: int32
+              main: 
+                type: string
+              description: 
+                type: string
+              icon: 
+                type: string
+    MinutelyInfo:
+      type: object
+      properties: 
+        dt: 
+          type: integer
+          format: int32
+        precipitation: 
+          type: integer
+          format: int32
+    HourlyInfo:
+      type: object
+      properties: 
+        dt: 
+          type: integer
+          format: int32
+        temp: 
+          type: number
+        feels_like: 
+          type: number
+        pressure: 
+          type: integer
+          format: int32
+        humidity: 
+          type: integer
+          format: int32
+        dew_point: 
+          type: integer
+          format: int32
+        uvi: 
+          type: number
+        clouds: 
+          type: integer
+          format: int32
+        visibility: 
+          type: integer
+          format: int32
+        wind_speed: 
+          type: number
+        wind_deg: 
+          type: integer
+          format: int32
+        wind_gust: 
+          type: number
+        weather: 
+          type: array
+          items: 
+            type: object
+            properties: 
+              id: 
+                type: integer
+                format: int32
+              main: 
+                type: string
+              description: 
+                type: string
+              icon: 
+                type: string
+        pop: 
+          type: integer
+          format: int32
+    DailyInfo:
+      type: object
+      properties: 
+        dt: 
+          type: integer
+          format: int32
+        sunrise: 
+          type: integer
+          format: int32
+        sunset: 
+          type: integer
+          format: int32
+        moonrise: 
+          type: integer
+          format: int32
+        moonset: 
+          type: integer
+          format: int32
+        moon_phase: 
+          type: number
+        temp: 
+          type: object
+          properties: 
+            day: 
+              type: number
+            min: 
+              type: number
+            max: 
+              type: number
+            night: 
+              type: number
+            eve: 
+              type: number
+            morn: 
+              type: number
+        feels_like: 
+          type: object
+          properties: 
+            day: 
+              type: number
+            night: 
+              type: number
+            eve: 
+              type: number
+            morn: 
+              type: number
+        pressure: 
+          type: integer
+          format: int32
+        humidity: 
+          type: integer
+          format: int32
+        dew_point: 
+          type: number
+        wind_speed: 
+          type: number
+        wind_deg: 
+          type: integer
+          format: int32
+        wind_gust: 
+          type: number
+        weather: 
+          type: array
+          items: 
+            type: object
+            properties: 
+              id: 
+                type: integer
+                format: int32
+              main: 
+                type: string
+              description: 
+                type: string
+              icon: 
+                type: string
+        clouds: 
+          type: integer
+          format: int32
+        pop: 
+          type: number
+        uvi: 
+          type: number
+    Response:
+      type: object
+      required:
+      - lat
+      - lon
+      properties:
+        lat: 
+          type: number
+        lon: 
+          type: number
+        timezone: 
+          type: string
+        timezone_offset: 
+          type: integer
+          format: int32
+        current:
+          $ref: '#/components/schemas/CurrentInfo'
+        minutely: 
+          type: array
+          items: 
+            $ref: '#/components/schemas/MinutelyInfo'
+        hourly: 
+          type: array
+          items: 
+            $ref: '#/components/schemas/HourlyInfo'
+        daily: 
+          type: array
+          items: 
+            $ref: '#/components/schemas/DailyInfo'
+        alerts: 
+          type: array
+          items: 
+            type: object
+            properties: 
+              sender_name: 
+                type: string
+              event: 
+                type: string
+              start: 
+                type: integer
+                format: int32
+              end: 
+                type: integer
+                format: int32
+              description: 
+                type: string
+              tags: 
+                type: array
+                items: 
