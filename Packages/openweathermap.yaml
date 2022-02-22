@@ -48,18 +48,39 @@ paths:
                 $ref: '#/components/schemas/ErrorModel'
 components:
   schemas:
-    ErrorModel:
-      required:
-      - cod
-      - message
+    Response:
       type: object
+      required:
+      - lat
+      - lon
       properties:
-        message:
+        lat: 
+          type: number
+        lon: 
+          type: number
+        timezone: 
           type: string
-        code:
-          maximum: 600
-          minimum: 100
+        timezone_offset: 
           type: integer
+          format: int32
+        current:
+          $ref: '#/components/schemas/CurrentInfo'
+        minutely: 
+          type: array
+          items: 
+            $ref: '#/components/schemas/MinutelyInfo'
+        hourly: 
+          type: array
+          items: 
+            $ref: '#/components/schemas/HourlyInfo'
+        daily: 
+          type: array
+          items: 
+            $ref: '#/components/schemas/DailyInfo'
+        alerts: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Alerts'
     CurrentInfo: 
       type: object
       properties: 
@@ -101,18 +122,20 @@ components:
           type: number
         weather: 
           type: array
-          items: 
-            type: object
-            properties: 
-              id: 
-                type: integer
-                format: int32
-              main: 
-                type: string
-              description: 
-                type: string
-              icon: 
-                type: string
+          items:
+            $ref: '#/components/schemas/CurrentWeatherItem'
+    CurrentWeatherItem:
+      type: object
+      properties: 
+        id: 
+          type: integer
+          format: int32
+        main: 
+          type: string
+        description: 
+          type: string
+        icon: 
+          type: string
     MinutelyInfo:
       type: object
       properties: 
@@ -158,21 +181,23 @@ components:
           type: number
         weather: 
           type: array
-          items: 
-            type: object
-            properties: 
-              id: 
-                type: integer
-                format: int32
-              main: 
-                type: string
-              description: 
-                type: string
-              icon: 
-                type: string
+          items:
+            $ref: '#/components/schemas/HourlyWeatherItem'
         pop: 
           type: integer
           format: int32
+    HourlyWeatherItem:
+      type: object
+      properties: 
+        id: 
+          type: integer
+          format: int32
+        main: 
+          type: string
+        description: 
+          type: string
+        icon: 
+          type: string
     DailyInfo:
       type: object
       properties: 
@@ -194,31 +219,9 @@ components:
         moon_phase: 
           type: number
         temp: 
-          type: object
-          properties: 
-            day: 
-              type: number
-            min: 
-              type: number
-            max: 
-              type: number
-            night: 
-              type: number
-            eve: 
-              type: number
-            morn: 
-              type: number
+          $ref: '#/components/schemas/DailyTempInfo'
         feels_like: 
-          type: object
-          properties: 
-            day: 
-              type: number
-            night: 
-              type: number
-            eve: 
-              type: number
-            morn: 
-              type: number
+          $ref: '#/components/schemas/DailyFeelsLikeInfo'
         pressure: 
           type: integer
           format: int32
@@ -237,17 +240,7 @@ components:
         weather: 
           type: array
           items: 
-            type: object
-            properties: 
-              id: 
-                type: integer
-                format: int32
-              main: 
-                type: string
-              description: 
-                type: string
-              icon: 
-                type: string
+            $ref: '#/components/schemas/DailyWeatherItem'
         clouds: 
           type: integer
           format: int32
@@ -255,53 +248,72 @@ components:
           type: number
         uvi: 
           type: number
-    Response:
+    DailyTempInfo:
       type: object
-      required:
-      - lat
-      - lon
-      properties:
-        lat: 
+      properties: 
+        day: 
           type: number
-        lon: 
+        min: 
           type: number
-        timezone: 
-          type: string
-        timezone_offset: 
+        max: 
+          type: number
+        night: 
+          type: number
+        eve: 
+          type: number
+        morn: 
+          type: number
+    DailyFeelsLikeInfo:
+      type: object
+      properties: 
+        day: 
+          type: number
+        night: 
+          type: number
+        eve: 
+          type: number
+        morn: 
+          type: number
+    DailyWeatherItem:
+      type: object
+      properties: 
+        id: 
           type: integer
           format: int32
-        current:
-          $ref: '#/components/schemas/CurrentInfo'
-        minutely: 
+        main: 
+          type: string
+        description: 
+          type: string
+        icon: 
+          type: string
+    Alerts: 
+      type: object
+      properties: 
+        sender_name: 
+          type: string
+        event: 
+          type: string
+        start: 
+          type: integer
+          format: int32
+        end: 
+          type: integer
+          format: int32
+        description: 
+          type: string
+        tags: 
           type: array
           items: 
-            $ref: '#/components/schemas/MinutelyInfo'
-        hourly: 
-          type: array
-          items: 
-            $ref: '#/components/schemas/HourlyInfo'
-        daily: 
-          type: array
-          items: 
-            $ref: '#/components/schemas/DailyInfo'
-        alerts: 
-          type: array
-          items: 
-            type: object
-            properties: 
-              sender_name: 
-                type: string
-              event: 
-                type: string
-              start: 
-                type: integer
-                format: int32
-              end: 
-                type: integer
-                format: int32
-              description: 
-                type: string
-              tags: 
-                type: array
-                items: 
-                  type: string
+            type: string
+    ErrorModel:
+      required:
+      - cod
+      - message
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          maximum: 600
+          minimum: 100
+          type: integer
