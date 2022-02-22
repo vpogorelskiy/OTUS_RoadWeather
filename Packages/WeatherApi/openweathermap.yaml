@@ -33,6 +33,11 @@ paths:
           name: units
           schema:
             type: string
+        - description: exclude
+          in: query
+          name: units
+          schema:
+            type: string
       responses:
         '200':
           description: success
