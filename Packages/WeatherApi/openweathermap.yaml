@@ -10,7 +10,7 @@ paths:
       tags:
       - getForecast
       description: 'One call'
-      operationId: getTheForecast
+      operationId: getForecast
       summary: List api.openweathermap.org 2.5s
       parameters:
         - description: apiKey
@@ -35,7 +35,7 @@ paths:
             type: string
         - description: exclude
           in: query
-          name: units
+          name: exclude
           schema:
             type: string
       responses:
