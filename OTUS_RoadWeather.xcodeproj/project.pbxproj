@@ -15,6 +15,8 @@
 		2B5D86A127BB9A930032CA96 /* DebouncingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D86A027BB9A930032CA96 /* DebouncingTextField.swift */; };
 		2B72B98427B640FF00840C3F /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B72B98327B640FF00840C3F /* MapView.swift */; };
 		2B72B98627B6413300840C3F /* SavedRoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B72B98527B6413200840C3F /* SavedRoutesView.swift */; };
+		2B7B329F27C758E6009BFB0F /* WeatherApi in Frameworks */ = {isa = PBXBuildFile; productRef = 2B7B329E27C758E6009BFB0F /* WeatherApi */; };
+		2B7B32A327C75ACE009BFB0F /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B32A227C75ACE009BFB0F /* WeatherManager.swift */; };
 		2BAADEFC27AC35F400ABD965 /* OTUS_RoadWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAADEEC27AC35F200ABD965 /* OTUS_RoadWeatherApp.swift */; };
 		2BAADEFD27AC35F400ABD965 /* OTUS_RoadWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAADEEC27AC35F200ABD965 /* OTUS_RoadWeatherApp.swift */; };
 		2BAADEFE27AC35F400ABD965 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAADEED27AC35F200ABD965 /* ContentView.swift */; };
@@ -32,6 +34,8 @@
 		2B5D86A027BB9A930032CA96 /* DebouncingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebouncingTextField.swift; sourceTree = "<group>"; };
 		2B72B98327B640FF00840C3F /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		2B72B98527B6413200840C3F /* SavedRoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRoutesView.swift; sourceTree = "<group>"; };
+		2B7B329D27C758D5009BFB0F /* WeatherApi */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = WeatherApi; path = Packages/WeatherApi; sourceTree = "<group>"; };
+		2B7B32A227C75ACE009BFB0F /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		2BAADEEC27AC35F200ABD965 /* OTUS_RoadWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTUS_RoadWeatherApp.swift; sourceTree = "<group>"; };
 		2BAADEED27AC35F200ABD965 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2BAADEEE27AC35F400ABD965 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -45,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B7B329F27C758E6009BFB0F /* WeatherApi in Frameworks */,
 				2B5D869927B947030032CA96 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -121,9 +126,34 @@
 			path = SavedRoutesView;
 			sourceTree = "<group>";
 		};
+		2B7B329C27C758D5009BFB0F /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				2B7B329D27C758D5009BFB0F /* WeatherApi */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		2B7B32A027C75AAE009BFB0F /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				2B7B32A127C75AB4009BFB0F /* WeatherManager */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		2B7B32A127C75AB4009BFB0F /* WeatherManager */ = {
+			isa = PBXGroup;
+			children = (
+				2B7B32A227C75ACE009BFB0F /* WeatherManager.swift */,
+			);
+			path = WeatherManager;
+			sourceTree = "<group>";
+		};
 		2BAADEE627AC35F200ABD965 = {
 			isa = PBXGroup;
 			children = (
+				2B7B329C27C758D5009BFB0F /* Packages */,
 				2BAADEEB27AC35F200ABD965 /* Shared */,
 				2BAADEFA27AC35F400ABD965 /* macOS */,
 				2BAADEF427AC35F400ABD965 /* Products */,
@@ -134,6 +164,7 @@
 		2BAADEEB27AC35F200ABD965 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2B7B32A027C75AAE009BFB0F /* Core */,
 				2B2A426627C2ADCF0024267B /* Extensions */,
 				2B72B98027B640E000840C3F /* UI */,
 				2BAADEEC27AC35F200ABD965 /* OTUS_RoadWeatherApp.swift */,
@@ -175,6 +206,9 @@
 			dependencies = (
 			);
 			name = "OTUS_RoadWeather (iOS)";
+			packageProductDependencies = (
+				2B7B329E27C758E6009BFB0F /* WeatherApi */,
+			);
 			productName = "OTUS_RoadWeather (iOS)";
 			productReference = 2BAADEF327AC35F400ABD965 /* OTUS_RoadWeather.app */;
 			productType = "com.apple.product-type.application";
@@ -259,6 +293,7 @@
 			files = (
 				2B72B98627B6413300840C3F /* SavedRoutesView.swift in Sources */,
 				2B5D869B27B9478D0032CA96 /* MapViewModel.swift in Sources */,
+				2B7B32A327C75ACE009BFB0F /* WeatherManager.swift in Sources */,
 				2B5D869E27B94E7A0032CA96 /* SavedRoutesVM.swift in Sources */,
 				2BAADEFE27AC35F400ABD965 /* ContentView.swift in Sources */,
 				2B2A426527C2A5540024267B /* RouteView.swift in Sources */,
@@ -542,6 +577,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2B7B329E27C758E6009BFB0F /* WeatherApi */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WeatherApi;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2BAADEE727AC35F200ABD965 /* Project object */;
 }
