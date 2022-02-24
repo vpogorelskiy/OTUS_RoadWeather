@@ -18,12 +18,12 @@ paths:
           name: apiKey
           schema:
             type: string
-        - description: lat
+        - description: latitude
           in: query
           name: lat
           schema:
             type: string
-        - description: lon
+        - description: longitude
           in: query
           name: lon
           schema:
