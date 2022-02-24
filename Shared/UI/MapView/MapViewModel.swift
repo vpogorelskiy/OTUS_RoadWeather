@@ -2,6 +2,12 @@ import Foundation
 import CoreLocation
 import MapKit
 
+extension MapViewModel {
+    enum Constants {
+        static let weatherPinsCount = 10
+    }
+}
+
 class MapViewModel: NSObject, ObservableObject {
     @Published var mapRegion: MKCoordinateRegion = .init() {
         didSet {
@@ -26,6 +32,7 @@ class MapViewModel: NSObject, ObservableObject {
         }
     }
     
+    private let weatherManager = WeatherManager()
     private let locationManager: CLLocationManager
     private let geoCoder: CLGeocoder
     private(set) var userLocation: CLLocation = .init() {
@@ -98,6 +105,17 @@ class MapViewModel: NSObject, ObservableObject {
                     animated: true)
                 self.lastRoute = route
             }
+        }
+    }
+    
+    func getWeatherFor(route: MKRoute) {
+        let routeCoordinates = route.polyline.coordinates
+        let step = routeCoordinates.count / Constants.weatherPinsCount
+        let chunked = routeCoordinates.enumerated().compactMap { enumerated in
+            return enumerated.offset % step == 0 ? enumerated.element : nil
+        }
+        weatherManager.getWeather(for: chunked) { responses in
+            
         }
     }
     
