@@ -104,6 +104,7 @@ class MapViewModel: NSObject, ObservableObject {
                     edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
                     animated: true)
                 self.lastRoute = route
+                self.destination = nil
                 self.getWeather(for: route)
             }
         }
@@ -119,6 +120,17 @@ class MapViewModel: NSObject, ObservableObject {
         print("\(Self.self).\(#function); chunked.count: \(chunked.count)")
         weatherManager.getWeather(for: chunked) { responses in
             print("\(Self.self).\(#function): Count: \(responses.count); \n \(responses)")
+            for response in responses {
+                let coordinate = CLLocationCoordinate2D(latitude: response.lat, longitude: response.lon)
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = coordinate
+
+                let temp = response.current?.temp ?? 0
+                let tempPrefix = temp > 0 ? "+ " : (temp < 0 ? "- " : "")
+                annotation.title = tempPrefix + "\(temp)"
+                
+                self.mapView?.addAnnotation(annotation)
+            }
         }
     }
     
