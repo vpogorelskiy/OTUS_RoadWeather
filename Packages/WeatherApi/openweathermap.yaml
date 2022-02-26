@@ -5,7 +5,7 @@ info:
 servers: 
 - url: https://api.openweathermap.org/data/2.5/
 paths:
-  /onecall/:
+  /onecall:
     get:
       tags:
       - getForecast
@@ -24,13 +24,13 @@ paths:
           in: query
           required: true
           schema:
-            type: string
+            type: double
         - name: lon
           description: Longitude
           in: query
           required: true
           schema:
-            type: string
+            type: double
         - name: units
           description: Units of measurement - metric, imperial
           in: query

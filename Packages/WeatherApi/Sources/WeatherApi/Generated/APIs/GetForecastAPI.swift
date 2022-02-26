@@ -25,7 +25,7 @@ open class GetForecastAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func getForecast(apiKey: String, lat: String, lon: String, units: String, exclude: String? = nil, lang: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponse?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func getForecast(apiKey: String, lat: Double, lon: Double, units: String, exclude: String? = nil, lang: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponse?, _ error: Error?) -> Void)) -> RequestTask {
         return getForecastWithRequestBuilder(apiKey: apiKey, lat: lat, lon: lon, units: units, exclude: exclude, lang: lang).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -48,19 +48,19 @@ open class GetForecastAPI {
      - parameter lang: (query) Language of the response (optional)
      - returns: RequestBuilder<ModelResponse> 
      */
-    open class func getForecastWithRequestBuilder(apiKey: String, lat: String, lon: String, units: String, exclude: String? = nil, lang: String? = nil) -> RequestBuilder<ModelResponse> {
-        let localVariablePath = "/onecall/"
+    open class func getForecastWithRequestBuilder(apiKey: String, lat: Double, lon: Double, units: String, exclude: String? = nil, lang: String? = nil) -> RequestBuilder<ModelResponse> {
+        let localVariablePath = "/onecall"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "apiKey": apiKey.encodeToJSON(),
-            "lat": lat.encodeToJSON(),
-            "lon": lon.encodeToJSON(),
-            "units": units.encodeToJSON(),
-            "exclude": exclude?.encodeToJSON(),
-            "lang": lang?.encodeToJSON(),
+            "apiKey": apiKey,
+            "lat": lat,
+            "lon": lon,
+            "units": units,
+            "exclude": exclude,
+            "lang": lang,
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [

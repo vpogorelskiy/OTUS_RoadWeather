@@ -46,7 +46,7 @@ class MapViewModel: NSObject, ObservableObject {
                                                   longitudeDelta: 10)
     private var lastRoute: MKRoute? {
         didSet {
-            print("\(Self.self).\(#function): \(String(describing: lastRoute?.polyline.coordinates))")
+//            print("\(Self.self).\(#function): \(String(describing: lastRoute?.polyline.coordinates))")
         }
     }
     
@@ -104,18 +104,21 @@ class MapViewModel: NSObject, ObservableObject {
                     edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
                     animated: true)
                 self.lastRoute = route
+                self.getWeather(for: route)
             }
         }
     }
     
-    func getWeatherFor(route: MKRoute) {
+    func getWeather(for route: MKRoute) {
+        print("\(Self.self).\(#function); route.polyline.coordinates.count: \(route.polyline.coordinates.count)")
         let routeCoordinates = route.polyline.coordinates
         let step = routeCoordinates.count / Constants.weatherPinsCount
         let chunked = routeCoordinates.enumerated().compactMap { enumerated in
             return enumerated.offset % step == 0 ? enumerated.element : nil
         }
+        print("\(Self.self).\(#function); chunked.count: \(chunked.count)")
         weatherManager.getWeather(for: chunked) { responses in
-            
+            print("\(Self.self).\(#function): Count: \(responses.count); \n \(responses)")
         }
     }
     
@@ -152,7 +155,7 @@ extension MapViewModel: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("\(Self.self).\(#function): \(locations)")
+//        print("\(Self.self).\(#function): \(locations)")
         guard let firstLocation = locations.first else {
             return
         }
