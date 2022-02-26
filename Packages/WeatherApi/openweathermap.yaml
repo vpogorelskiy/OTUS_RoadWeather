@@ -13,29 +13,38 @@ paths:
       operationId: getForecast
       summary: List api.openweathermap.org 2.5s
       parameters:
-        - description: apiKey
+        - name: apiKey
+          description: Openweather API key
           in: query
-          name: apiKey
+          required: true
           schema:
             type: string
-        - description: latitude
+        - name: lat
+          description: Latitude
           in: query
-          name: lat
+          required: true
           schema:
             type: string
-        - description: longitude
+        - name: lon
+          description: Longitude
           in: query
-          name: lon
+          required: true
           schema:
             type: string
-        - description: units
+        - name: units
+          description: Units of measurement - metric, imperial
           in: query
-          name: units
+          required: true
           schema:
             type: string
-        - description: exclude
+        - name: exclude
+          description: Exclude forecasts from the response - minutely, hourly, daily, alerts
           in: query
-          name: exclude
+          schema:
+            type: string
+        - name: lang
+          description: Language of the response
+          in: query
           schema:
             type: string
       responses:
