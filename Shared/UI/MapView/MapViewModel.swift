@@ -9,6 +9,14 @@ extension MapViewModel {
     }
 }
 
+enum WeatherDisplay: Int {
+    case temperature = 0
+    case pressure
+    case humidity
+    case visibility
+    case wind
+}
+
 class MapViewModel: NSObject, ObservableObject {
     @Published var mapRegion: MKCoordinateRegion = .init()
     @Published var destination: CLLocation?
@@ -19,11 +27,16 @@ class MapViewModel: NSObject, ObservableObject {
         }
     }
     
+    @Published var displayedWeather: WeatherDisplay = .temperature {
+        didSet {
+            updateAnnotations()
+        }
+    }
+    
     weak var mapView: MKMapView?
     
     var searchText: String = "" {
         didSet {
-            print("\(Self.self).\(#function): \(searchText)")
             updateFoundLocations(searchText)
         }
     }
@@ -103,7 +116,6 @@ class MapViewModel: NSObject, ObservableObject {
         }
 
         weatherManager.getWeather(for: chunked) { [weak self] responses in
-            print("\(Self.self).\(#function): Count: \(responses.count); \n \(responses)")
             self?.currentRoute?.weatherInfo = responses
             self?.updateAnnotations()
         }
@@ -148,10 +160,25 @@ class MapViewModel: NSObject, ObservableObject {
                 let coordinate = CLLocationCoordinate2D(latitude: response.lat, longitude: response.lon)
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = coordinate
+                
+                let weather = response.current
 
-                let temp = response.current?.temp ?? 0
-                let tempPrefix = temp > 0 ? "+ " : ""
-                annotation.title = tempPrefix + "\(temp)"
+                var weatherText = ""
+                switch displayedWeather {
+                case .temperature:
+                    let temp = weather?.temp ?? 0
+                    weatherText = (temp > 0 ? "+ " : "")  + "\(temp)"
+                case .pressure:
+                    weatherText = "\(weather?.pressure ?? 0)"
+                case .humidity:
+                    weatherText = "\(weather?.humidity ?? 0)"
+                case .visibility:
+                    weatherText = "\(weather?.visibility ?? 0)"
+                case .wind:
+                    weatherText = "\(weather?.windSpeed ?? 0)"
+                }
+                
+                annotation.title = weatherText
                 
                 mapView.addAnnotation(annotation)
             }

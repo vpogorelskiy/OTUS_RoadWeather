@@ -41,6 +41,17 @@ struct RouteView: View {
                     }
                 }
                 Spacer()
+                if viewModel.currentRoute != nil {
+                    Picker("Weather display", selection: $viewModel.displayedWeather) {
+                        Text("Temperature").tag(WeatherDisplay.temperature)
+                        Text("Pressure").tag(WeatherDisplay.pressure)
+                        Text("Humidity").tag(WeatherDisplay.humidity)
+                        Text("Visibility").tag(WeatherDisplay.visibility)
+                        Text("Wind").tag(WeatherDisplay.wind)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .background(.white)
+                }
             }.padding()
         }
     }
