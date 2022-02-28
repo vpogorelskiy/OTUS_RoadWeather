@@ -4,7 +4,7 @@
 Можно построить маршрут до выбранной точки и просмотреть погоду по маршруту
 Можно переключаться между просмотром температуры, давления, влажности, видимости и скорости ветра
 
-![alt text](https://github.com/vpogorelskiy/OTUS_RoadWeather/blob/main/Screenshot.png?raw=true)
+![alt text](https://github.com/vpogorelskiy/OTUS_RoadWeather/blob/main/Screenshot/Screenshot.png?raw=true)
 
 В планах:
 
