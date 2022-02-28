@@ -11,7 +11,7 @@ struct ContentView: View {
             SavedRoutesView()
                 .tabItem {
                     Image(systemName: "bookmark")
-                    Text("Routes")
+                    Text("Saved Routes")
                 }
         }
     }

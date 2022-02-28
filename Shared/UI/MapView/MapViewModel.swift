@@ -38,6 +38,7 @@ class MapViewModel: NSObject, ObservableObject {
     var searchText: String = "" {
         didSet {
             updateFoundLocations(searchText)
+            updateFoundMKLocations(searchText)
         }
     }
     
@@ -119,6 +120,20 @@ class MapViewModel: NSObject, ObservableObject {
             self?.currentRoute?.weatherInfo = responses
             self?.updateAnnotations()
         }
+    }
+    
+    private func updateFoundMKLocations(_ query: String) {
+        guard let mapView = mapView, !query.isEmpty else {
+            return
+        }
+
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = query
+        let search = MKLocalSearch(request: request)
+        search.start { response, error in
+            print("\(Self.self).\(#function): \(response?.mapItems)")
+        }
+        
     }
     
     private func updateFoundLocations(_ query: String) {
