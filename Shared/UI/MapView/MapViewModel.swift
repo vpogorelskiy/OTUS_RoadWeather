@@ -74,7 +74,6 @@ class MapViewModel: NSObject, ObservableObject {
         guard let map = mapView else { return }
         
         geoCoder.reverseGeocodeLocation(userLocation) { [weak self] placemarks, error in
-            print("\(Self.self).\(#function): \(placemarks)")
             self?.foundLocations = []
             guard let placeMark = placemarks?.first else { return }
             
@@ -105,13 +104,12 @@ class MapViewModel: NSObject, ObservableObject {
     }
     
     func getWeather(for route: MKRoute) {
-        print("\(Self.self).\(#function); route.polyline.coordinates.count: \(route.polyline.coordinates.count)")
         let routeCoordinates = route.polyline.coordinates
         let step = routeCoordinates.count / Constants.weatherPinsCount
         let chunked = routeCoordinates.enumerated().compactMap { enumerated in
             return enumerated.offset % step == 0 ? enumerated.element : nil
         }
-        print("\(Self.self).\(#function); chunked.count: \(chunked.count)")
+
         weatherManager.getWeather(for: chunked) { [weak self] responses in
             print("\(Self.self).\(#function): Count: \(responses.count); \n \(responses)")
             for response in responses {
@@ -135,7 +133,6 @@ class MapViewModel: NSObject, ObservableObject {
         }
         
         geoCoder.geocodeAddressString(query, in: nil, preferredLocale: .init(identifier: "RU")) { [weak self] placemarks, error in
-            print("\(Self.self).\(#function): \(placemarks)")
             if let error = error {
                 print("\(Self.self).\(#function); ERROR finding location: \(error) ")
             }
@@ -162,7 +159,6 @@ extension MapViewModel: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        print("\(Self.self).\(#function): \(locations)")
         guard let firstLocation = locations.first else {
             return
         }
