@@ -1,6 +1,7 @@
 import Foundation
 import CoreLocation
 import MapKit
+import WeatherApi
 
 extension MapViewModel {
     enum Constants {
@@ -12,12 +13,9 @@ class MapViewModel: NSObject, ObservableObject {
     @Published var mapRegion: MKCoordinateRegion = .init()
     @Published var destination: CLLocation?
     @Published var foundLocations: [CLPlacemark] = []
-    @Published var currentRoute: MKRoute? {
+    @Published var currentRoute: RouteInfo? {
         didSet {
-            if let mapView = mapView, currentRoute == nil {
-                mapView.removeOverlays(mapView.overlays)
-                mapView.removeAnnotations(mapView.annotations)
-            }
+            updateAnnotations()
         }
     }
     
@@ -70,9 +68,11 @@ class MapViewModel: NSObject, ObservableObject {
         }
     }
     
+    func resetRoute() {
+        currentRoute = nil
+    }
+    
     func buildRoute(to: CLPlacemark) {
-        guard let map = mapView else { return }
-        
         geoCoder.reverseGeocodeLocation(userLocation) { [weak self] placemarks, error in
             self?.foundLocations = []
             guard let placeMark = placemarks?.first else { return }
@@ -88,15 +88,7 @@ class MapViewModel: NSObject, ObservableObject {
             let directions = MKDirections(request: request)
             directions.calculate { response, error in
                 guard let route = response?.routes.first else { return }
-                map.removeAnnotations(map.annotations)
-                map.removeOverlays(map.overlays)
-                map.addAnnotations([from, dest])
-                map.addOverlay(route.polyline)
-                map.setVisibleMapRect(
-                    route.polyline.boundingMapRect,
-                    edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
-                    animated: true)
-                self?.currentRoute = route
+                self?.currentRoute = RouteInfo(route: route, from: from, to: dest)
                 self?.destination = nil
                 self?.getWeather(for: route)
             }
@@ -112,17 +104,8 @@ class MapViewModel: NSObject, ObservableObject {
 
         weatherManager.getWeather(for: chunked) { [weak self] responses in
             print("\(Self.self).\(#function): Count: \(responses.count); \n \(responses)")
-            for response in responses {
-                let coordinate = CLLocationCoordinate2D(latitude: response.lat, longitude: response.lon)
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = coordinate
-
-                let temp = response.current?.temp ?? 0
-                let tempPrefix = temp > 0 ? "+ " : (temp < 0 ? "- " : "")
-                annotation.title = tempPrefix + "\(temp)"
-                
-                self?.mapView?.addAnnotation(annotation)
-            }
+            self?.currentRoute?.weatherInfo = responses
+            self?.updateAnnotations()
         }
     }
     
@@ -145,6 +128,33 @@ class MapViewModel: NSObject, ObservableObject {
             }
             
             self?.foundLocations = placemarks
+        }
+    }
+    
+    private func updateAnnotations() {
+        guard let mapView = mapView else { return }
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.removeOverlays(mapView.overlays)
+        
+        if let currentRoute = currentRoute {
+            mapView.addAnnotations([currentRoute.from, currentRoute.to])
+            mapView.addOverlay(currentRoute.route.polyline)
+            mapView.setVisibleMapRect(
+                currentRoute.route.polyline.boundingMapRect,
+                edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
+                animated: true)
+            
+            for response in currentRoute.weatherInfo {
+                let coordinate = CLLocationCoordinate2D(latitude: response.lat, longitude: response.lon)
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = coordinate
+
+                let temp = response.current?.temp ?? 0
+                let tempPrefix = temp > 0 ? "+ " : ""
+                annotation.title = tempPrefix + "\(temp)"
+                
+                mapView.addAnnotation(annotation)
+            }
         }
     }
 }

@@ -23,6 +23,7 @@
 		2BAADEFF27AC35F400ABD965 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAADEED27AC35F200ABD965 /* ContentView.swift */; };
 		2BAADF0027AC35F400ABD965 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BAADEEE27AC35F400ABD965 /* Assets.xcassets */; };
 		2BAADF0127AC35F400ABD965 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BAADEEE27AC35F400ABD965 /* Assets.xcassets */; };
+		2BC2FBE227CD0C3E00724429 /* RouteInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC2FBE127CD0C3E00724429 /* RouteInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		2BAADEF327AC35F400ABD965 /* OTUS_RoadWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OTUS_RoadWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BAADEF927AC35F400ABD965 /* OTUS_RoadWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OTUS_RoadWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BAADEFB27AC35F400ABD965 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		2BC2FBE127CD0C3E00724429 /* RouteInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 		2B7B32A027C75AAE009BFB0F /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				2BC2FBE027CD0C3500724429 /* Route */,
 				2B7B32A127C75AB4009BFB0F /* WeatherManager */,
 			);
 			path = Core;
@@ -188,6 +191,14 @@
 				2BAADEFB27AC35F400ABD965 /* macOS.entitlements */,
 			);
 			path = macOS;
+			sourceTree = "<group>";
+		};
+		2BC2FBE027CD0C3500724429 /* Route */ = {
+			isa = PBXGroup;
+			children = (
+				2BC2FBE127CD0C3E00724429 /* RouteInfo.swift */,
+			);
+			path = Route;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,6 +304,7 @@
 			files = (
 				2B72B98627B6413300840C3F /* SavedRoutesView.swift in Sources */,
 				2B5D869B27B9478D0032CA96 /* MapViewModel.swift in Sources */,
+				2BC2FBE227CD0C3E00724429 /* RouteInfo.swift in Sources */,
 				2B7B32A327C75ACE009BFB0F /* WeatherManager.swift in Sources */,
 				2B5D869E27B94E7A0032CA96 /* SavedRoutesVM.swift in Sources */,
 				2BAADEFE27AC35F400ABD965 /* ContentView.swift in Sources */,

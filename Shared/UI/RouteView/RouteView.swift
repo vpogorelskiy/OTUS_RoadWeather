@@ -31,7 +31,7 @@ struct RouteView: View {
                     HStack {
                         Spacer()
                         Button {
-                            viewModel.currentRoute = nil
+                            viewModel.resetRoute()
                         } label: {
                             Image(systemName: "multiply.circle")
                                 .tint(.black)
