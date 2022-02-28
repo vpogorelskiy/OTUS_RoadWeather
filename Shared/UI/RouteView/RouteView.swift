@@ -20,10 +20,25 @@ struct RouteView: View {
                             } label: {
                                 Text(location.name ?? "\(location)")
                             }
+                            
+                            
 
                             
                         }
                     }.frame(minHeight: 30, maxHeight: 150, alignment: .top)
+                }
+                if viewModel.currentRoute != nil {
+                    HStack {
+                        Spacer()
+                        Button {
+                            viewModel.currentRoute = nil
+                        } label: {
+                            Image(systemName: "multiply.circle")
+                                .tint(.black)
+                                .font(.system(size: 20))
+                        }
+
+                    }
                 }
                 Spacer()
             }.padding()

@@ -9,9 +9,15 @@ extension MapViewModel {
 }
 
 class MapViewModel: NSObject, ObservableObject {
-    @Published var mapRegion: MKCoordinateRegion = .init() {
+    @Published var mapRegion: MKCoordinateRegion = .init()
+    @Published var destination: CLLocation?
+    @Published var foundLocations: [CLPlacemark] = []
+    @Published var currentRoute: MKRoute? {
         didSet {
-            
+            if let mapView = mapView, currentRoute == nil {
+                mapView.removeOverlays(mapView.overlays)
+                mapView.removeAnnotations(mapView.annotations)
+            }
         }
     }
     
@@ -21,14 +27,6 @@ class MapViewModel: NSObject, ObservableObject {
         didSet {
             print("\(Self.self).\(#function): \(searchText)")
             updateFoundLocations(searchText)
-        }
-    }
-    
-    @Published var destination: CLLocation?
-    
-    @Published var foundLocations: [CLPlacemark] = [] {
-        didSet {
-//            print("\(Self.self).\(#function): \(foundLocations)")
         }
     }
     
@@ -44,11 +42,6 @@ class MapViewModel: NSObject, ObservableObject {
     
     private var mapSpan: MKCoordinateSpan = .init(latitudeDelta: 10,
                                                   longitudeDelta: 10)
-    private var lastRoute: MKRoute? {
-        didSet {
-//            print("\(Self.self).\(#function): \(String(describing: lastRoute?.polyline.coordinates))")
-        }
-    }
     
     override init() {
         locationManager = .init()
@@ -80,8 +73,9 @@ class MapViewModel: NSObject, ObservableObject {
     func buildRoute(to: CLPlacemark) {
         guard let map = mapView else { return }
         
-        
-        geoCoder.reverseGeocodeLocation(userLocation) { placemarks, error in
+        geoCoder.reverseGeocodeLocation(userLocation) { [weak self] placemarks, error in
+            print("\(Self.self).\(#function): \(placemarks)")
+            self?.foundLocations = []
             guard let placeMark = placemarks?.first else { return }
             
             let from = MKPlacemark(placemark: placeMark)
@@ -103,9 +97,9 @@ class MapViewModel: NSObject, ObservableObject {
                     route.polyline.boundingMapRect,
                     edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
                     animated: true)
-                self.lastRoute = route
-                self.destination = nil
-                self.getWeather(for: route)
+                self?.currentRoute = route
+                self?.destination = nil
+                self?.getWeather(for: route)
             }
         }
     }
@@ -118,7 +112,7 @@ class MapViewModel: NSObject, ObservableObject {
             return enumerated.offset % step == 0 ? enumerated.element : nil
         }
         print("\(Self.self).\(#function); chunked.count: \(chunked.count)")
-        weatherManager.getWeather(for: chunked) { responses in
+        weatherManager.getWeather(for: chunked) { [weak self] responses in
             print("\(Self.self).\(#function): Count: \(responses.count); \n \(responses)")
             for response in responses {
                 let coordinate = CLLocationCoordinate2D(latitude: response.lat, longitude: response.lon)
@@ -129,7 +123,7 @@ class MapViewModel: NSObject, ObservableObject {
                 let tempPrefix = temp > 0 ? "+ " : (temp < 0 ? "- " : "")
                 annotation.title = tempPrefix + "\(temp)"
                 
-                self.mapView?.addAnnotation(annotation)
+                self?.mapView?.addAnnotation(annotation)
             }
         }
     }
@@ -141,6 +135,7 @@ class MapViewModel: NSObject, ObservableObject {
         }
         
         geoCoder.geocodeAddressString(query, in: nil, preferredLocale: .init(identifier: "RU")) { [weak self] placemarks, error in
+            print("\(Self.self).\(#function): \(placemarks)")
             if let error = error {
                 print("\(Self.self).\(#function); ERROR finding location: \(error) ")
             }
